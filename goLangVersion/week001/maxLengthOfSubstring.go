@@ -3,20 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	var s = "abcabcbb"
+	var s = "abcb"
 	substring := lengthOfLongestSubstring(s)
 	fmt.Println(substring)
 }
 
 func lengthOfLongestSubstring(s string) int {
 	var maxCount = 0
-	if len(s) == 0 {
-		return maxCount
+	if len(s) == 0 || len(s) == 1 {
+		return len(s)
 	}
 
-	for index, value := range s {
-		valueMap := make(map[int]int)
-		fmt.Println(index, value)
+	for index := range s {
+		valueMap := make(map[byte]int)
+		valueMap[s[index]] = index
 		var j = index + 1
 		if j >= len(s) {
 			break
@@ -24,18 +24,22 @@ func lengthOfLongestSubstring(s string) int {
 
 		for ; j < len(s); j++ {
 			var curVal = s[j]
-			if _, ok := valueMap[int(curVal)]; ok {
-				count := j - index + 1
+			if _, ok := valueMap[curVal]; ok {
+				count := j - index
 				if count >= maxCount {
-					break
+					maxCount = count
 				}
+				break
 			} else {
-				valueMap[int(curVal)] = j
+				valueMap[curVal] = j
 			}
 
 		}
-		if j == len(s)-1 {
-			maxCount = j - index + 1
+		if j == len(s) {
+			count := j - index
+			if count > maxCount {
+				maxCount = count
+			}
 			break
 		}
 
