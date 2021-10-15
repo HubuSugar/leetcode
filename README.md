@@ -1,3 +1,3 @@
 # leetcode
-leetcode算法
-1. 
+leetcode for java & go
+
