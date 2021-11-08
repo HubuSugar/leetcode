@@ -13,113 +13,56 @@ import java.util.Map;
 public class IntToRoman {
 
     /**
-     * 用了个笨办法ac了
+     * 用了个笨办法ac了(穷举法)，目前换成了滑动窗口，耗时好像更长了，但是通用性提高了
      * @param num
      * @return
      */
     public String intToRoman(int num) {
+        //分别表示0 - 1000;
+        String[] base = new String[]{"","I","V","X","L","C","D","M"};
+
+        int flag = 0;
 
         List<String> res = new ArrayList<>();
-        int flag = 1;
-        while (num != 0) {
+        while(num != 0){
+
             int remain = num % 10;
-
-            if (remain != 0) {
-                if (flag == 1) {
-                    if (remain < 4) {
-                        for (int i = 0; i < remain; i++) {
-                            res.add("I");
-                        }
-                    } else if (remain == 4) {
-                        res.add("IV");
-                    } else if (remain == 5) {
-                        res.add("V");
-                    } else if (remain < 9) {
-                        StringBuilder tmp = new StringBuilder();
-                        for (int i = 0; i <= remain - 6; i++) {
-                            tmp.append("I");
-                        }
-                        tmp.insert(0, "V");
-                        res.add(tmp.toString());
-                    } else {
-                        res.add("IX");
-                    }
-                } else if (flag == 10) {
-                    if (remain < 4) {
-                        for (int i = 0; i < remain; i++) {
-                            res.add("X");
-                        }
-                    } else if (remain == 4) {
-                        res.add("XL");
-                    } else if (remain == 5) {
-                        res.add("L");
-                    } else if (remain < 9) {
-                        StringBuilder tmp = new StringBuilder();
-                        for (int i = 0; i <= remain - 6; i++) {
-                            tmp.append("X");
-                        }
-                        tmp.insert(0, "L");
-                        res.add(tmp.toString());
-                    } else {
-                        res.add("XC");
-                    }
-
-                } else if (flag == 100) {
-                    if (remain < 4) {
-                        for (int i = 0; i < remain; i++) {
-                            res.add("C");
-                        }
-                    } else if (remain == 4) {
-                        res.add("CD");
-                    } else if (remain == 5) {
-                        res.add("D");
-                    } else if (remain < 9) {
-                        StringBuilder tmp = new StringBuilder();
-                        for (int i = 0; i <= remain - 6; i++) {
-                            tmp.append("C");
-                        }
-                        tmp.insert(0, "D");
-                        res.add(tmp.toString());
-                    } else {
-                        res.add("CM");
-                    }
-
-                } else if (flag == 1000) {
-                    if (remain < 4) {
-                        for (int i = 0; i < remain; i++) {
-                            res.add("M");
-                        }
-                    }
+            if(remain == 0){
+                res.add(base[0]);
+            }else if (remain < 4) {
+                for (int i = 0; i < remain; i++) {
+                    res.add(base[flag * 2 + 1]);
                 }
-
-
+            } else if (remain == 4) {
+                String tmp = base[flag * 2 + 1] + base[flag * 2 + 2];
+                res.add(tmp);
+            } else if (remain == 5) {
+                res.add(base[flag * 2 + 2]);
+            } else if (remain < 9) {
+                StringBuilder tmp = new StringBuilder();
+                for (int i = 0; i <= remain - 6; i++) {
+                    tmp.append(base[flag * 2 + 1]);
+                }
+                tmp.insert(0, base[flag * 2 + 2]);
+                res.add(tmp.toString());
+            } else {
+                String tmp = base[flag * 2 + 1] + base[flag * 2 + 3];
+                res.add(tmp);
             }
-            flag *= 10;
+            flag++;
             num = num / 10;
-
         }
-
         StringBuilder result = new StringBuilder();
-        for(int i = res.size() - 1;i >=0;i--){
+        for(int i = res.size() - 1 ;i >= 0;i--){
             result.append(res.get(i));
         }
+
         return result.toString();
     }
 
-    public Map<Integer, String> dic() {
-        HashMap<Integer, String> map = new HashMap<>();
-        map.put(1, "I");
-        map.put(5, "V");
-        map.put(10, "X");
-        map.put(50, "L");
-        map.put(100, "C");
-        map.put(500, "D");
-        map.put(1000, "M");
-        return map;
-    }
 
     public static void main(String[] args) {
 
-        System.out.println(new IntToRoman().intToRoman(1994));
+        System.out.println(new IntToRoman().intToRoman(58));
     }
 }
