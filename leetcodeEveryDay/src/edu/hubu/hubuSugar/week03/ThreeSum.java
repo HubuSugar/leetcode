@@ -83,7 +83,51 @@ public class ThreeSum {
         return result;
     }
 
+    /**
+     * 使用排序加上双指针的思路
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum1(int[] nums){
+        List<List<Integer>> ans = new ArrayList<>();
+        if(nums == null || nums.length <= 2) return ans;
+        Arrays.sort(nums);
+        int len = nums.length;
+        for(int i = 0; i< len; i++){
+            if(i > 0 && nums[i] == nums[i - 1]){
+                continue;
+            }
+            twoSum(nums, i + 1, len - 1,-nums[i],nums[i],ans);
+        }
+        return ans;
+    }
+
+    private void twoSum(int[] nums,int start,int end,int target,int value,List<List<Integer>> ans){
+        while(start < end){
+            int sum = nums[start] + nums[end];
+            if(sum == target){
+                List<Integer> one = new ArrayList<>();
+                one.add(nums[start]);
+                one.add(nums[end]);
+                one.add(value);
+                ans.add(one);
+                while(start < end && nums[start] ==nums[start + 1]){
+                    start++;
+                }
+                start++;
+                while(start < end && nums[end] == nums[end - 1]){
+                    end--;
+                }
+                end--;
+            }else if(sum > target){
+                end--;
+            }else{
+                start++;
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(new ThreeSum().threeSum(new int[]{-1,0,1,2,-1,-4,-2,-3,3,0,4}));
+        System.out.println(new ThreeSum().threeSum1(new int[]{-1,0,1,2,-1,-4,-2,-3,3,0,4}));
     }
 }
