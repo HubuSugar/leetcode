@@ -11,7 +11,6 @@ import edu.hubu.hubuSugar.common.ListNodeBuilder;
 public class ReverseList {
 
     public ListNode reverse(ListNode head){
-
         if(head == null) return null;
         ListNode after = head;
         ListNode pre = null;
@@ -22,7 +21,6 @@ public class ReverseList {
             head = after;
         }
         return pre;
-
     }
 
     public static void main(String[] args) {
