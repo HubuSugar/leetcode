@@ -8,7 +8,7 @@ package edu.hubu.hubuSugar.week04;
 public class StrStr {
 
     /**
-     * 基于KMP的串的模式匹配
+     * 遍历源字符串的解法
      * @param hayStack
      * @param needle
      * @return
