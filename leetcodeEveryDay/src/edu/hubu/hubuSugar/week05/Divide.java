@@ -34,16 +34,39 @@ public class Divide {
 
     /**
      * 基于二分搜索法，除数每次乘以2
+     * example: 100 / 3
+     * 100 - 3
+     * 100 - 3 * 2
+     * 100 - 3 * 2 ^ 2
+     * 100 - 3 * 2 ^ 3
      * @param dividend
      * @param divisor
      * @return
      */
     public int divide(int dividend,int divisor){
+        int sign = (((dividend ^ divisor) >> 31 ) & 0x1) == 1 ? -1 : 1;
+        if(divisor == 0) throw new RuntimeException("divided by zero");
+        int count = 0;
+        long divided = Math.abs((long)dividend);
+        long divide = Math.abs((long)divisor);
 
+        while(divided >= divide){
+            int i = 1;   //表示除数每次增加的倍数
+            long temp = divide;
+            while(divided >= temp){
+                divided = divided - temp;
+                count = count + i;
+                if(count * sign >= Integer.MAX_VALUE)
+                    return Integer.MAX_VALUE;
+                if(count * sign <= Integer.MIN_VALUE){
+                    return Integer.MIN_VALUE;
+                }
+                i = i << 1;
+                temp = temp << 1;   // divisor = divisor * 2 ^ n
+            }
+        }
 
-
-
-        return 0;
+        return count * sign;
     }
 
     /**
