@@ -1,7 +1,7 @@
 package edu.hubu.hubuSugar.week04;
 
-import edu.hubu.common.ListNode;
-import edu.hubu.common.ListNodeBuilder;
+import edu.hubu.hubuSugar.common.ListNode;
+import edu.hubu.hubuSugar.common.ListNodeBuilder;
 
 
 /**

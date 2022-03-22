@@ -1,4 +1,6 @@
-package edu.hubu.common;
+package edu.hubu.hubuSugar.common;
+
+import edu.hubu.hubuSugar.common.ListNode;
 
 /**
  * @Author: huxiaoge

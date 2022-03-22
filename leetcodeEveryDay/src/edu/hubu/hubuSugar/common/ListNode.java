@@ -1,4 +1,4 @@
-package edu.hubu.common;
+package edu.hubu.hubuSugar.common;
 
 /**
  * @Author: huxiaoge
