@@ -1,5 +1,7 @@
 package edu.hubu.hubuSugar.common;
 
+import edu.hubu.hubuSugar.common.ListNode;
+
 /**
  * @Author: huxiaoge
  * @Date: 2021-09-28
