@@ -32,7 +32,7 @@ public class Trap {
                 if(height[right] > right_max){
                     right_max = height[right];
                 }else{
-                  result += right_max = height[right];
+                  result += right_max - height[right];
                 }
                 right--;
             }
