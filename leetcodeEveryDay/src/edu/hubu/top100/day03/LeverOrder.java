@@ -1,5 +1,6 @@
 package edu.hubu.top100.day03;
 
+import edu.hubu.hubuSugar.common.ListNode;
 import edu.hubu.hubuSugar.common.TreeNode;
 
 import java.util.ArrayList;
@@ -39,6 +40,45 @@ public class LeverOrder {
         return result;
     }
 
+    /**
+     * 用一个指针记录每层最右边节点
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root == null) return result;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        TreeNode pRight = root;
+        TreeNode last = null;
+        List<Integer> one = new ArrayList<>();
+
+        while (!queue.isEmpty()){
+            TreeNode cur = queue.poll();
+            one.add(cur.val);
+
+            if(cur.left != null){
+                queue.add(cur.left);
+                last = cur.left;
+            }
+            if(cur.right != null){
+                queue.add(cur.right);
+                last = cur.right;
+            }
+
+            if(cur == pRight){
+                result.add(new ArrayList<>(one));
+                one = new ArrayList<>();
+                pRight = last;
+            }
+
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
 
         TreeNode root = new TreeNode(1);
@@ -54,6 +94,6 @@ public class LeverOrder {
         node22.left = null;
         node22.right = node34;
 
-        System.out.println(new LeverOrder().levelOrder(root));
+        System.out.println(new LeverOrder().levelOrder1(root));
     }
 }
