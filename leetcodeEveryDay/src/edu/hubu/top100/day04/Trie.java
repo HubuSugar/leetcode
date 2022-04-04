@@ -11,22 +11,23 @@ import java.util.Map;
 public class Trie {
 
     private boolean end = false;
-    private final Trie[] subNodes;
+    private final Map<Character, Trie> subNodes;
 
     public Trie() {
-        subNodes = new Trie[26];
+        subNodes = new HashMap<>();
     }
 
     public void insert(String word) {
         Trie temp = this;
         char[] chars = word.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            int index = chars[i] - 'a';
-            if(subNodes[index] == null){
-                subNodes[index] = new Trie();
+            char c = chars[i];
+            Trie node = temp.subNodes.get(c);
+            if(node == null){
+                temp.subNodes.put(c , new Trie());
             }
 
-            temp = temp.subNodes[index];
+            temp = temp.subNodes.get(c);
             if(i == chars.length - 1){
                 temp.setEnd(true);
             }
