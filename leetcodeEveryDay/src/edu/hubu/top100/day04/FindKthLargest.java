@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 /**
  * @Author: huxiaoge
  * @Date: 2022-04-04
- * @Description:
+ * @Description: 寻找第K大元素
  **/
 public class FindKthLargest {
     public int findKthLargest(int[] nums, int k) {
