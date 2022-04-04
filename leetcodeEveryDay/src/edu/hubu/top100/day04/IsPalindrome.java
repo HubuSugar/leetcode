@@ -10,6 +10,11 @@ import edu.hubu.hubuSugar.common.ListNodeBuilder;
  **/
 public class IsPalindrome {
 
+    /**
+     * 翻转链表的后半部分
+     * @param head
+     * @return
+     */
     public boolean isPalindrome(ListNode head) {
 
         if(head == null) return true;
@@ -18,17 +23,15 @@ public class IsPalindrome {
 
         ListNode p1 = head;
         ListNode p2 = reverse;
-        boolean result = true;
-        while(result && p2 != null){
+        while(p2 != null){
             if(p1.val != p2.val){
-                result = false;
+                return false;
             }
             p1 = p1.next;
             p2 = p2.next;
         }
 
-        // mid.next = reverse(reverse);
-        return result;
+        return true;
     }
 
     public ListNode findMid(ListNode head){
